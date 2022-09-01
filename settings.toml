@@ -1,0 +1,24 @@
+[default]
+
+sqlInsert = "INSERT INTO etiquetas1 (Quantidade, Material, Cor, Diametro, Mesa, Bico, Origem,codBarras) VALUES (?,?,?,?,?,?,?,?)"
+sqlPesquisa = "select MAX(Lote) from etiquetas1"
+sqlUpdate = "UPDATE etiquetas1 SET codBarras = ? WHERE lote = ?"
+sqlApaga = "delete from etiquetas1"
+sqlZerabanco = "delete from sqlite_sequence where name='etiquetas1'"
+sqlSelect = "SELECT * FROM etiquetas1 WHERE Lote = ?"
+
+
+#Dados do relatorio
+tipoPagina = "A4"
+folhaEtiquetas = 7
+
+
+
+#sqlCadastros = "SELECT * FROM usuario where dataCadastro >= date(?) AND dataCadastro <  date(?, '+1 day')"
+#sqlCadPeriodo ="SELECT * FROM usuario where dataCadastro BETWEEN (?) AND date(?, '+1 day')"
+#sqlAtualizacao = "SELECT * FROM usuario where dataAtualizacao >= date(?) AND dataAtualizacao <  date(?, '+1 day')"
+#sqlAtuPeriodo ="SELECT * FROM usuario where dataAtualizacao BETWEEN (?) AND date(?, '+1 day')"
+#arquivoNovos = "dadosCadastros.json"
+#arquivosAlterados = "dadosAlterados.json"
+
+
