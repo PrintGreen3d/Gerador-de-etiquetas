@@ -171,7 +171,14 @@ class MyWindow:
             listOrigem.append(self.CheckVar5.get())
             listOrigem.append(self.CheckVar6.get())
             listDadosLote.append(montaOrigem(listOrigem))
-            listDadosLote.append(str('Akie'))
+
+            if (listDadosLote[1] == 'ABS'):
+                listDadosLote.append(str('Akie'))
+            elif (listDadosLote[1] == 'PLA'):
+                listDadosLote.append(str('Emi'))
+            else:
+                listDadosLote.append(str('Hitomi'))
+
             insertBanco(listDadosLote)
             time.sleep(2)
             finalId = ultimaPosicaoSql()
@@ -179,7 +186,6 @@ class MyWindow:
             updateCodigoBarras(listaCodigos)
             time.sleep(2)
             messagebox.showinfo("INCLUSÂO", "Dados Inseridos com sucesso!!")
-            fechaBanco()
         except Exception:
             print("problemas em inserir novos dados")
             traceback.print_exc()
@@ -201,7 +207,6 @@ class MyWindow:
         self.CheckVar6.set(0)
 
     def sub(self, event):
-        abreBanco()
         finalId = ultimaPosicaoSql()
         listaLote = buscaDadosUltimaPosicao(finalId)
         montaLogo(listaLote)
@@ -210,6 +215,7 @@ class MyWindow:
 
     def close_win(self, event):
         window.destroy()
+        fechaBanco()
 
 
 window = Tk()

@@ -27,12 +27,12 @@ def ultimaPosicaoSql():
     cursor.execute(settings.sqlPesquisa)
     for linha in cursor.fetchall():
         ultimoId = list(linha)
-    return str(ultimoId[0])
+    return ultimoId
 
 
 def adicionaIdCodigoBarras(ultimoId, infoLote):
     listaCodigos = []
-    codigoBarras = str(ultimoId[0]) + 'Akie' + \
+    codigoBarras = str(ultimoId[0]) + str(infoLote[7]) + \
         str(infoLote[0]) + str(infoLote[1]) + str(infoLote[2])
     listaCodigos.append(ultimoId[0])
     listaCodigos.append(codigoBarras)
@@ -61,7 +61,7 @@ def insertBanco(listaDados):
 
 def buscaDadosUltimaPosicao(lastID):
     listaLote = []
-    cursor.execute(settings.sqlSelect, (lastID, ))
+    cursor.execute(settings.sqlSelect, (lastID[0], ))
     for linha in cursor.fetchall():
         listaLote = list(linha)
     return listaLote
