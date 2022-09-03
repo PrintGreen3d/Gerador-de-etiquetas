@@ -8,6 +8,28 @@ from bancoSqlLite import *
 from relatorio import *
 
 
+def verificaLista(listaOrigem):
+    for i in range(len(listaOrigem)):
+        if (len(listaOrigem[i]) is 0):
+            return False
+    return True
+
+
+def limpaCampos(self):
+    self.t1.delete('0', END)
+    self.cb_material.delete(0, END)
+    self.cb_cor.delete(0, END)
+    self.cb_diametro.delete(0, END)
+    self.cb_mesa.delete(0, END)
+    self.cb_bico.delete(0, END)
+    self.CheckVar1.set(0)
+    self.CheckVar2.set(0)
+    self.CheckVar3.set(0)
+    self.CheckVar4.set(0)
+    self.CheckVar5.set(0)
+    self.CheckVar6.set(0)
+
+
 def montaOrigem(listOrigem):
     origem = []
     if (listOrigem[0] == 1):
@@ -179,13 +201,18 @@ class MyWindow:
             else:
                 listDadosLote.append(str('Hitomi'))
 
-            insertBanco(listDadosLote)
-            time.sleep(2)
-            finalId = ultimaPosicaoSql()
-            listaCodigos = adicionaIdCodigoBarras(finalId, listDadosLote)
-            updateCodigoBarras(listaCodigos)
-            time.sleep(2)
-            messagebox.showinfo("INCLUSÂO", "Dados Inseridos com sucesso!!")
+            if verificaLista(listDadosLote) is False:
+                messagebox.showerror("Erro", "Nem todos os campos foram \
+                                   preenchidos")
+            else:
+                insertBanco(listDadosLote)
+                time.sleep(2)
+                finalId = ultimaPosicaoSql()
+                listaCodigos = adicionaIdCodigoBarras(finalId, listDadosLote)
+                updateCodigoBarras(listaCodigos)
+                time.sleep(2)
+                messagebox.showinfo("INCLUSÂO", "Dados Inseridos com \
+                    sucesso!!")
         except Exception:
             print("problemas em inserir novos dados")
             traceback.print_exc()
@@ -193,18 +220,7 @@ class MyWindow:
             messagebox.showerror("INCLUSÂO", "Os dados não foram inseridos!")
 
         # Limpeza dos campos
-        self.t1.delete('0', END)
-        self.cb_material.delete(0, END)
-        self.cb_cor.delete(0, END)
-        self.cb_diametro.delete(0, END)
-        self.cb_mesa.delete(0, END)
-        self.cb_bico.delete(0, END)
-        self.CheckVar1.set(0)
-        self.CheckVar2.set(0)
-        self.CheckVar3.set(0)
-        self.CheckVar4.set(0)
-        self.CheckVar5.set(0)
-        self.CheckVar6.set(0)
+        limpaCampos(self)
 
     def sub(self, event):
         finalId = ultimaPosicaoSql()

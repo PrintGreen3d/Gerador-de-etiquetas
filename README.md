@@ -35,11 +35,11 @@ Ferramentas utilizadas para desenvolvimento do projeto:
 
 ## 📌 Melhorias
 
-Proximas melhorias a serem iimplementadas:
+Proximas melhorias a serem realizadas:
 
 * Montagem do relatorio (etiquetas)
 * Definir o gabarito da etiqueta (atualmente folha a4)
 * Imprimir a quantidade de etiquetas informada pelo usuario
-* Paginação de paginas de etiquetas (conforme quantidade informada)
-* Verificação do preechimento dos campos
+* Paginação de paginas de etiquetas (conforme quantidade informada) - https://www.youtube.com/watch?v=b4HJpi3DyVs
+* Verificação do preechimento dos campos - ✅
 * Consistencias dos dados (Ex: Temp. é compativel com material?)
