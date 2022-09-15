@@ -1,4 +1,3 @@
-import imp
 import time
 from tkinter import *
 from tkinter import messagebox
@@ -10,7 +9,7 @@ from relatorio import *
 
 def verificaLista(listaOrigem):
     for i in range(len(listaOrigem)):
-        if (len(listaOrigem[i]) is 0):
+        if (len(listaOrigem[i]) == 0):
             return False
     return True
 
@@ -223,11 +222,17 @@ class MyWindow:
         limpaCampos(self)
 
     def sub(self, event):
-        finalId = ultimaPosicaoSql()
-        listaLote = buscaDadosUltimaPosicao(finalId)
-        montaLogo(listaLote)
-        time.sleep(2)
-        abrePDF()
+        try:
+            abreBanco()
+            finalId = ultimaPosicaoSql()
+            listaLote = buscaDadosUltimaPosicao(finalId)
+            montaLogo(listaLote)
+            time.sleep(2)
+            abrePDF()
+        except Exception:
+            messagebox.showerror("Listagem", "Não foram listado corretamente!")
+            traceback.print_exc()
+            con.rollback()
 
     def close_win(self, event):
         window.destroy()
