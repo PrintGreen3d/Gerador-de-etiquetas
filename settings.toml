@@ -11,6 +11,8 @@ sqlSelect = "SELECT * FROM etiquetas1 WHERE Lote = ?"
 #Dados do relatorio
 tipoPagina = "A4"
 folhaEtiquetas = 7
+folhaNome = 'imagens/hello_world.pdf'
+logoPG3D = 'imagens/Logo.svg'
 
 
 

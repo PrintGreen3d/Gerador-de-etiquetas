@@ -1,76 +1,88 @@
 import sys
 import subprocess
 from svglib.svglib import svg2rlg
+from reportlab.graphics import renderPDF
 from reportlab.pdfgen import canvas
 from reportlab.graphics.barcode import code128
 from dynaconf import settings
 
-img_file = "imagens/Teste.png"
-pdf_file = "imagens/hello_world.pdf"
+img_file = svg2rlg(settings.logoPG3D)
 y_start = 760
 
-can = canvas.Canvas(pdf_file, pagesize=settings.tipoPagina)
+can = canvas.Canvas(settings.folhaNome, pagesize=settings.tipoPagina)
 can.setFont("Helvetica", 8)
 
 
 def abrePDF():
     print("Abrindo o PDF")
     opener = "open" if sys.platform == "darwin" else "xdg-open"
-    subprocess.call([opener, pdf_file])
+    subprocess.call([opener, settings.folhaNome])
     print("Aguarde ....")
 
 
 def montaCodBarra(codBarra, contador):
     codigoBarra = codBarra + str(contador)
     barcode39 = code128.Code128(codigoBarra)
-    barcode39Std = code128.Code128(codigoBarra, barHeight=33, stop=2)
+    barcode39Std = code128.Code128(codigoBarra, barHeight=33, barWidth=0.7,
+                                   stop=2)
     return barcode39Std
 
 
 def montaLogo(listaLote):
     locomove = 110
     y_MoveBarra = 75
+    
+    renderPDF.draw(img_file, can, 30, 750)
+    montaCodBarra(listaLote[8], 1).drawOn(can, -15, 680)
+    
 
-    for x in range(settings.folhaEtiquetas):
-        if (x == 0):
-            # Monta o Logo
-            can.drawImage(img_file, 50,
-                          y_start, width=120,
-                          preserveAspectRatio=True, mask='auto')
-            can.drawImage(img_file, 250,
-                          y_start, width=120,
-                          preserveAspectRatio=True, mask='auto')
-            can.drawImage(img_file, 450,
-                          y_start, width=120,
-                          preserveAspectRatio=True, mask='auto')
-            # Monta o codigo de barras
-            montaCodBarra(listaLote[8], x).drawOn(can, 30,
-                                                  (y_start - y_MoveBarra))
-            montaCodBarra(listaLote[8], x).drawOn(can, 230,
-                                                  (y_start - y_MoveBarra))
-            montaCodBarra(listaLote[8], x).drawOn(can, 430,
-                                                  (y_start - y_MoveBarra))
-            y_MoveBarra = y_MoveBarra + 110
+    #renderPDF.draw(img_file, can, 220, 750)
+    #renderPDF.draw(img_file, can, 320, 750)
+    #renderPDF.draw(img_file, can, 500, 750)
+#
 
-        if (x > 0):
-            can.drawImage(img_file, 50,  (y_start - locomove), width=120,
-                          preserveAspectRatio=True, mask='auto')
-            can.drawImage(img_file, 250, (y_start - locomove), width=120,
-                          preserveAspectRatio=True, mask='auto')
-            can.drawImage(img_file, 450, (y_start - locomove), width=120,
-                          preserveAspectRatio=True, mask='auto')
-            montaCodBarra(listaLote[8], x).drawOn(can, 30,
-                                                  (y_start - y_MoveBarra))
-            montaCodBarra(listaLote[8], x).drawOn(can, 230,
-                                                  (y_start - y_MoveBarra))
-            montaCodBarra(listaLote[8], x).drawOn(can, 430,
-                                                  (y_start - y_MoveBarra))
-
-            locomove = locomove + 110
-            y_MoveBarra = y_MoveBarra + 110
-
-        x += 1
     montaTexto(listaLote)
+    #for x in range(settings.folhaEtiquetas):
+    #    if (x == 0):
+        #    # Monta o Logo
+        #    renderPDF.draw(img_file, can, 50, 5)
+        #    can.drawImage(img_file, 50,
+        #                  y_start, width=120,
+        #                  preserveAspectRatio=True, mask='auto')
+        #    can.drawImage(img_file, 250,
+        #                  y_start, width=120,
+        #                  preserveAspectRatio=True, mask='auto')
+        #    can.drawImage(img_file, 450,
+        #                  y_start, width=120,
+        #                  preserveAspectRatio=True, mask='auto')
+        #    # Monta o codigo de barras
+        #    montaCodBarra(listaLote[8], x).drawOn(can, 30,
+        #                                          (y_start - y_MoveBarra))
+        #    montaCodBarra(listaLote[8], x).drawOn(can, 230,
+        #                                          (y_start - y_MoveBarra))
+        #    montaCodBarra(listaLote[8], x).drawOn(can, 430,
+        #                                          (y_start - y_MoveBarra))
+        #    y_MoveBarra = y_MoveBarra + 110
+
+        #if (x > 0):
+        #    can.drawImage(img_file, 50,  (y_start - locomove), width=120,
+        #                  preserveAspectRatio=True, mask='auto')
+        #    can.drawImage(img_file, 250, (y_start - locomove), width=120,
+        #                  preserveAspectRatio=True, mask='auto')
+        #    can.drawImage(img_file, 450, (y_start - locomove), width=120,
+        #                  preserveAspectRatio=True, mask='auto')
+        #    montaCodBarra(listaLote[8], x).drawOn(can, 30,
+        #                                          (y_start - y_MoveBarra))
+        #    montaCodBarra(listaLote[8], x).drawOn(can, 230,
+        #                                          (y_start - y_MoveBarra))
+        #    montaCodBarra(listaLote[8], x).drawOn(can, 430,
+        #                                          (y_start - y_MoveBarra))
+
+        #    locomove = locomove + 110
+        #    y_MoveBarra = y_MoveBarra + 110
+
+        #x += 1
+    
 
 
 def montaTexto(listaLote):
@@ -81,10 +93,11 @@ def montaTexto(listaLote):
     Fonte = "Origem: " + str(listaLote[7])
 
     # linha 1
-    can.drawString(60, (y_start - 10), string1)
-    can.drawString(50, (y_start - 20), string2)
-    can.drawString(60, (y_start - 30), string3)
-    can.drawString(60, (y_start - 40), Fonte)
+    can.drawString(18, (y_start - 18), string1)
+    can.drawString(5, (y_start - 25), string2)
+    can.drawString(16, (y_start - 35), string3)
+    can.drawString(5, (y_start - 45), Fonte)
+    
     can.drawString(270, (y_start - 10), string1)
     can.drawString(250, (y_start - 20), string2)
     can.drawString(260, (y_start - 30), string3)
