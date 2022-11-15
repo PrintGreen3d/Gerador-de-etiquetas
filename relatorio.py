@@ -28,27 +28,122 @@ def montaCodBarra(codBarra, contador):
     return barcode39Std
 
 
+def totalDePaginas(listaLote):
+    numPaginas = 0
+    auxPaginas = listaLote[1]
+    print("antes do while: " + str(listaLote[1]))
+    while auxPaginas >= 0:
+        auxPaginas = auxPaginas - 28
+        numPaginas = numPaginas + 1
+    return numPaginas
+
+
+def imprimeLogo(listaLote):
+    
+    #variavel e quantidade de etiquetas,maximo de 28 por pagina
+    folhaCheia = settings.folhaEtiquetas
+    
+    #variavel com o total do lote. Ex: 12
+    totalLote = listaLote[1]
+    
+    #Variavel para contar etiquetas criadas
+    etiquetaLocal = 0
+    
+    #variavel para contas do eixo X
+    localHorizontal = settings.horizontal
+    
+    #variavel para contas do eixo Y
+    localVertical = settings.vertical
+    
+    
+    
+    
+    renderPDF.draw(img_file, can, 30,  750)
+    renderPDF.draw(img_file, can, 190, 750)
+    renderPDF.draw(img_file, can, 350, 750)
+    renderPDF.draw(img_file, can, 510, 750)
+    
+    renderPDF.draw(img_file, can, 30,  640)
+    renderPDF.draw(img_file, can, 190, 640)
+    renderPDF.draw(img_file, can, 350, 640)
+    renderPDF.draw(img_file, can, 510, 640)
+    
+    renderPDF.draw(img_file, can, 30, 530)
+    renderPDF.draw(img_file, can, 190,530)
+    renderPDF.draw(img_file, can, 350,530)
+    renderPDF.draw(img_file, can, 510,530)
+    
+    renderPDF.draw(img_file, can, 30, 420)
+    renderPDF.draw(img_file, can, 190,420)
+    renderPDF.draw(img_file, can, 350,420)
+    renderPDF.draw(img_file, can, 510,420)
+    
+    renderPDF.draw(img_file, can, 30, 310)
+    renderPDF.draw(img_file, can, 190, 310)
+    renderPDF.draw(img_file, can, 350, 310)
+    renderPDF.draw(img_file, can, 510, 310)
+    
+    renderPDF.draw(img_file, can, 30, 200)
+    renderPDF.draw(img_file, can, 190, 200)
+    renderPDF.draw(img_file, can, 350, 200)
+    renderPDF.draw(img_file, can, 510, 200)
+    
+    renderPDF.draw(img_file, can, 30, 90)
+    renderPDF.draw(img_file, can, 190, 90)
+    renderPDF.draw(img_file, can, 350, 90)
+    renderPDF.draw(img_file, can, 510, 90)
+    
+
 def montaLogo(listaLote):
-    locomove = 110
+    criaPagina = 0
     y_MoveBarra = 75
     
-    renderPDF.draw(img_file, can, 30, 750)
-    montaCodBarra(listaLote[8], 1).drawOn(can, -15, 680)
-    
-    renderPDF.draw(img_file, can, 190, 750)
-    montaCodBarra(listaLote[8], 2).drawOn(can, 135, 680)
-    
-    renderPDF.draw(img_file, can, 350, 750)
-    montaCodBarra(listaLote[8], 2).drawOn(can, 290, 680)
-    
-    renderPDF.draw(img_file, can, 510, 750)
-    montaCodBarra(listaLote[8], 2).drawOn(can, 450, 680)
-    
-    # Linha 2 
-    renderPDF.draw(img_file, can, 30, 645)
-    montaCodBarra(listaLote[8], 1).drawOn(can, -15, 575)
-    
-    
+    # Devolve o numero de paginas necessários
+    print(totalDePaginas(listaLote))
+    imprimeLogo(listaLote)
+     
+        
+
+
+
+
+    #
+    #montaCodBarra(listaLote[8], 1).drawOn(can, -15, 680)
+    #
+    #
+    #montaCodBarra(listaLote[8], 2).drawOn(can, 135, 680)
+    #
+    #
+    #montaCodBarra(listaLote[8], 2).drawOn(can, 290, 680)
+    #
+    #
+    #montaCodBarra(listaLote[8], 2).drawOn(can, 450, 680)
+    #
+    ## Linha 2 
+    #
+    #montaCodBarra(listaLote[8], 1).drawOn(can, -15, 570)
+    #
+    ## Linha 3 
+    #
+    #montaCodBarra(listaLote[8], 1).drawOn(can, -15, 460)
+    #
+    ## Linha 4 
+    #
+    #montaCodBarra(listaLote[8], 1).drawOn(can, -15, 350)
+    #
+    ## Linha 5 
+    #
+    #montaCodBarra(listaLote[8], 1).drawOn(can, -15, 240)
+    #
+    ## Linha 6 
+    #
+    #montaCodBarra(listaLote[8], 1).drawOn(can, -15, 130)
+    #
+    ## Linha 7 
+    #
+    #montaCodBarra(listaLote[8], 1).drawOn(can, -15, 20)
+  
+        
 
     montaTexto(listaLote)
     #for x in range(settings.folhaEtiquetas):
@@ -122,10 +217,10 @@ def montaTexto(listaLote):
     can.drawString(485, 715, Fonte)
 
     ## linha 2
-    can.drawString(18, 637, string1)
-    can.drawString(5,  628, string2)
-    can.drawString(16, 619, string3)
-    can.drawString(5,  610, Fonte)
+    can.drawString(18, 632, string1)
+    can.drawString(5,  623, string2)
+    can.drawString(16, 614, string3)
+    can.drawString(5,  605, Fonte)
     
     #can.drawString(60, (y_start - 120), string1)
     #can.drawString(50, (y_start - 130), string2)

@@ -10,10 +10,15 @@ sqlSelect = "SELECT * FROM etiquetas1 WHERE Lote = ?"
 
 #Dados do relatorio
 tipoPagina = "A4"
-folhaEtiquetas = 7
+folhaEtiquetas = 28
 folhaNome = 'imagens/hello_world.pdf'
 logoPG3D = 'imagens/Logo.svg'
 
+vertical = 160
+horizontal = 110
+
+imagemVertical = 30
+imagemHorizontal = 750
 
 
 #sqlCadastros = "SELECT * FROM usuario where dataCadastro >= date(?) AND dataCadastro <  date(?, '+1 day')"
