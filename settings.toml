@@ -13,21 +13,7 @@ folhaEtiquetas = 28
 folhaNome = 'imagens/hello_world.pdf'
 logoPG3D = 'imagens/Logo.svg'
 #Posição verical - LOGO
-imagemVertical1 = 30
-imagemVertical2 = 190
-imagemVertical3 = 350
-imagemVertical4 = 510
-#Posição horizontal - LOGO
-imagemHorizontal1 = 750
-imagemHorizontal2 = 640
-imagemHorizontal3 = 530
-imagemHorizontal4 = 420
-imagemHorizontal5 = 310
-imagemHorizontal6 = 200
-imagemHorizontal7 = 90
 
-recuoVertical = 160
-recuoHorizontal = 110
 
 #sqlCadastros = "SELECT * FROM usuario where dataCadastro >= date(?) AND dataCadastro <  date(?, '+1 day')"
 #sqlCadPeriodo ="SELECT * FROM usuario where dataCadastro BETWEEN (?) AND date(?, '+1 day')"
