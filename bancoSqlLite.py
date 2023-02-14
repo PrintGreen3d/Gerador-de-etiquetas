@@ -1,6 +1,7 @@
 import sqlite3
 import traceback
 import re
+from tkinter import messagebox
 from dynaconf import settings
 
 
@@ -40,6 +41,7 @@ def adicionaIdCodigoBarras(ultimoId, infoLote):
 
 
 def insertBanco(listaDados):
+    messagebox.showinfo("Fazendo o insert dos dados na tabela")
     print("Fazendo o insert dos dados na tabela")
     try:
         cursor.execute(settings.sqlInsert, (
@@ -52,9 +54,11 @@ def insertBanco(listaDados):
             str(listaDados[6]),
             str(listaDados[7])))
         con.commit()
-        print('Dados inseridos com sucesso.')
+        print("Dados inseridos com sucesso.")
+        messagebox.showinfo("Dados inseridos com sucesso!")
     except Exception:
         print("problemas em inserir novos dados")
+        messagebox.showinfo("problemas em inserir novos dados")
         traceback.print_exc()
         con.rollback()
 
@@ -69,18 +73,21 @@ def buscaDadosUltimaPosicao(lastID):
 
 def updateCodigoBarras(dadosBarras):
     print("Fazendo update no campo codigo de barras")
+    messagebox.showinfo("Fazendo update no campo codigo de barras")
     cursor.execute(settings.sqlUpdate, (dadosBarras[1], dadosBarras[0]))
     con.commit()
 
 
 def fechaBanco():
     print("Fechando conexão com o banco")
+    messagebox.showinfo("Fechando conexão com o banco")
     con.close()
 
 
 def desfazTudo():
     con.rollback()
     print("Veja o log! Tivemos algum problema no caminho!!!")
+    messagebox.showinfo("Veja o log! Tivemos algum problema no caminho!!!")
 
 
 def abreBanco():

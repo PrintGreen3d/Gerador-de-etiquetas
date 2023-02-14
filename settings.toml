@@ -12,7 +12,8 @@ tipoPagina = "A4"
 folhaEtiquetas = 28
 folhaNome = 'imagens/hello_world.pdf'
 logoPG3D = 'imagens/Logo.svg'
-#Posição verical - LOGO
+iconPG3D = 'imagens/icone.ico'
+
 
 
 #sqlCadastros = "SELECT * FROM usuario where dataCadastro >= date(?) AND dataCadastro <  date(?, '+1 day')"

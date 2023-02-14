@@ -21,6 +21,7 @@ def limpaCampos(self):
     self.cb_diametro.delete(0, END)
     self.cb_mesa.delete(0, END)
     self.cb_bico.delete(0, END)
+    self.cb_tipoVenda.delete(0, END)
     self.CheckVar1.set(0)
     self.CheckVar2.set(0)
     self.CheckVar3.set(0)
@@ -68,15 +69,18 @@ class MyWindow:
         self.lbl6.place(x=170, y=110)
 
         self.lbl7 = Label(win, text='Origem do Material:')
-        self.lbl7.place(x=15, y=160)
+        self.lbl7.place(x=15, y=210)
+        
+        self.lbl8 = Label(win, text='Tipo Etiquetas:')
+        self.lbl8.place(x=15, y=160)
 
-        self.t1 = Entry(width="10", bd=3)
+        self.t1 = Entry(width="16", bd=3)
         self.btn1 = Button(win, text='Salva')
         self.btn2 = Button(win, text='Gerar')
         self.btn3 = Button(win, text='Cancelar')
         self.t1.place(x=15, y=30)
 
-        # self.t2.place(x=200, y=100)
+        # self.t2.place(x=200, y=110)
         self.b1 = Button(win, text='Salvar', width="8", command=self.add)
         self.b2 = Button(win, text='Gerar', width="8")
         self.b3 = Button(win, text='Cancelar', width="8")
@@ -84,9 +88,9 @@ class MyWindow:
         self.b2.bind('<Button-1>', self.sub)
         self.b3.bind('<Button-1>', self.close_win)
 
-        self.b1.place(x=20, y=300)
-        self.b2.place(x=120, y=300)
-        self.b3.place(x=220, y=300)
+        self.b1.place(x=20, y=340)
+        self.b2.place(x=120, y=340)
+        self.b3.place(x=220, y=340)
 
         var = StringVar()
         var.set("ABS")
@@ -96,7 +100,7 @@ class MyWindow:
 
         cor_var = StringVar()
         cor_var.set(" ")
-        cor_data = ("Preto", "Branco", "Azul", "Verde",
+        cor_data = ("Preto", "Branco", "Azul", "Verde", "Verde Militar",
                     "Roxo", "Vermelho", "Cinza")
         self.cb_cor = Combobox(win, width="15", values=cor_data)
         self.cb_cor.place(x=15, y=80)
@@ -118,6 +122,12 @@ class MyWindow:
         cor_data = ("220º - 240º", "180º ~ 220º", "235º - 260º")
         self.cb_bico = Combobox(win, width="15", values=cor_data)
         self.cb_bico.place(x=170, y=130)
+
+        cor_var = StringVar()
+        cor_var.set(" ")
+        cor_data = ("Venda", "Amostra")
+        self.cb_bico = Combobox(win, width="15", values=cor_data)
+        self.cb_bico.place(x=15, y=180)
 
         self.CheckVar1 = IntVar()
         self.CheckVar2 = IntVar()
@@ -168,12 +178,12 @@ class MyWindow:
                                    height=2,
                                    width=10)
 
-        self.Button1.place(x=0, y=180)  # i#D
-        self.Button3.place(x=3, y=210)  # AUTO
-        self.Button5.place(x=23, y=240)  # Eletronicos
-        self.Button2.place(x=135, y=180)
-        self.Button4.place(x=160, y=210)
-        self.Button6.place(x=125, y=240)
+        self.Button1.place(x=0, y=230)  # i#D
+        self.Button3.place(x=3, y=260)  # AUTO
+        self.Button5.place(x=23, y=290)  # Eletronicos
+        self.Button2.place(x=135, y=230)
+        self.Button4.place(x=160, y=260)
+        self.Button6.place(x=125, y=290)
 
     def add(self):
         listDadosLote = []
@@ -242,5 +252,8 @@ class MyWindow:
 window = Tk()
 mywin = MyWindow(window)
 window.title('Gerador de Etiquetas')
-window.geometry("350x350+10+20")
+window.geometry("350x390+10+20")
+icon = PhotoImage(file=settings.iconPG3D)
+window.iconphoto(True, icon)
+
 window.mainloop()
