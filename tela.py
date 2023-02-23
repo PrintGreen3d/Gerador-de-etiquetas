@@ -70,7 +70,7 @@ class MyWindow:
 
         self.lbl7 = Label(win, text='Origem do Material:')
         self.lbl7.place(x=15, y=210)
-        
+
         self.lbl8 = Label(win, text='Tipo Etiquetas:')
         self.lbl8.place(x=15, y=160)
 
@@ -126,8 +126,8 @@ class MyWindow:
         cor_var = StringVar()
         cor_var.set(" ")
         cor_data = ("Venda", "Amostra")
-        self.cb_bico = Combobox(win, width="15", values=cor_data)
-        self.cb_bico.place(x=15, y=180)
+        self.cb_tipoVenda = Combobox(win, width="15", values=cor_data)
+        self.cb_tipoVenda.place(x=15, y=180)
 
         self.CheckVar1 = IntVar()
         self.CheckVar2 = IntVar()
@@ -164,7 +164,7 @@ class MyWindow:
                                    height=2,
                                    width=10)
 
-        self.Button5 = Checkbutton(win, text="Eletronicos",
+        self.Button5 = Checkbutton(win, text="Eletro",
                                    variable=self.CheckVar5,
                                    onvalue=1,
                                    offvalue=0,
@@ -209,6 +209,8 @@ class MyWindow:
                 listDadosLote.append(str('Emi'))
             else:
                 listDadosLote.append(str('Hitomi'))
+
+            listDadosLote.append(self.cb_tipoVenda.get())
 
             if verificaLista(listDadosLote) is False:
                 messagebox.showerror("Erro", "Nem todos os campos foram \

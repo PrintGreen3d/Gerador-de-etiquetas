@@ -8,7 +8,7 @@ from dynaconf import settings
 
 img_file = svg2rlg(settings.logoPG3D)
 can = canvas.Canvas(settings.folhaNome, pagesize=settings.tipoPagina)
-can.setFont("Helvetica", 8)
+can.setFont("Helvetica", 7)
 
 
 def abrePDF():
@@ -21,7 +21,7 @@ def abrePDF():
 def montaCodBarra(codBarra, contador):
     codigoBarra = codBarra + str(contador)
     barcode39 = code128.Code128(codigoBarra)
-    barcode39Std = code128.Code128(codigoBarra, barHeight=33, barWidth=0.65,
+    barcode39Std = code128.Code128(codigoBarra, barHeight=33, barWidth=0.46,
                                    stop=2)
     return barcode39Std
 

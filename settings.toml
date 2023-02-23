@@ -1,6 +1,6 @@
 [default]
 
-sqlInsert = "INSERT INTO etiquetas1 (Quantidade, Material, Cor, Diametro, Mesa, Bico, Origem,codBarras) VALUES (?,?,?,?,?,?,?,?)"
+sqlInsert = "INSERT INTO etiquetas1 (Quantidade, Material, Cor, Diametro, Mesa, Bico, Origem,codBarras, tipo) VALUES (?,?,?,?,?,?,?,?,?)"
 sqlPesquisa = "select MAX(Lote) from etiquetas1"
 sqlUpdate = "UPDATE etiquetas1 SET codBarras = ? WHERE lote = ?"
 sqlApaga = "delete from etiquetas1"

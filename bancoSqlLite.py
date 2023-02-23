@@ -20,6 +20,7 @@ def criaBanco():
         "Bico"	TEXT NOT NULL,
         "Origem"	TEXT NOT NULL,
         "codBarras"	TEXT NOT NULL,
+        "tipo"	TEXT NOT NULL,
         PRIMARY KEY("Lote" AUTOINCREMENT)
     )''')
 
@@ -41,7 +42,6 @@ def adicionaIdCodigoBarras(ultimoId, infoLote):
 
 
 def insertBanco(listaDados):
-    messagebox.showinfo("Fazendo o insert dos dados na tabela")
     print("Fazendo o insert dos dados na tabela")
     try:
         cursor.execute(settings.sqlInsert, (
@@ -52,13 +52,12 @@ def insertBanco(listaDados):
             str(listaDados[4]),
             str(listaDados[5]),
             str(listaDados[6]),
-            str(listaDados[7])))
+            str(listaDados[7]),
+            str(listaDados[8])))
         con.commit()
         print("Dados inseridos com sucesso.")
-        messagebox.showinfo("Dados inseridos com sucesso!")
     except Exception:
         print("problemas em inserir novos dados")
-        messagebox.showinfo("problemas em inserir novos dados")
         traceback.print_exc()
         con.rollback()
 
@@ -80,7 +79,7 @@ def updateCodigoBarras(dadosBarras):
 
 def fechaBanco():
     print("Fechando conexão com o banco")
-    messagebox.showinfo("Fechando conexão com o banco")
+    # messagebox.showinfo("Fechando conexão com o banco")
     con.close()
 
 
