@@ -12,6 +12,7 @@ tipoPagina = "A4"
 folhaEtiquetas = 28
 folhaNome = 'imagens/hello_world.pdf'
 logoPG3D = 'imagens/Logo.svg'
+logoAmostra = 'imagens/Amostra.svg'
 iconPG3D = 'imagens/icone.ico'
 
 

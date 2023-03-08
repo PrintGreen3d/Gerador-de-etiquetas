@@ -36,7 +36,8 @@ def montaTexto(listaLote):
 def montaCodBarra(codBarra, contador):
     codigoBarra = codBarra + str(contador)
     barcode39 = code128.Code128(codigoBarra)
-    barcode39Std = code128.Code128(codigoBarra, barHeight=35, barWidth=0.9, stop=2)
+    barcode39Std = code128.Code128(
+        codigoBarra, barHeight=35, barWidth=0.9, stop=2)
     return barcode39Std
 
 
@@ -48,10 +49,10 @@ def add_image(image_path):
     my_canvas.drawString(10, 775, "Temperatura do bico: 180º ~ 220º")
     my_canvas.drawString(25, 765, "Temperatura da mesa: 110º")
     my_canvas.drawString(35, 755, "Origem: I3D - Coop - GB")
-    
+
     # Monta o codigo de barras
     montaCodBarra("2Akie31ABSPreto", 1).drawOn(my_canvas, -10, 718)
-    
+
     my_canvas.save()
 
 

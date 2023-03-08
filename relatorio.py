@@ -7,6 +7,7 @@ from reportlab.graphics.barcode import code128
 from dynaconf import settings
 
 img_file = svg2rlg(settings.logoPG3D)
+img_amostra = svg2rlg(settings.logoAmostra)
 can = canvas.Canvas(settings.folhaNome, pagesize=settings.tipoPagina)
 can.setFont("Helvetica", 7)
 
@@ -41,6 +42,7 @@ def imprimeCodBarras(listaLote, etiquetaNumero, barras_x, barras_y):
 
 
 def montaTexto(listaLote, escrita_y, escrita_x):
+
     string1 = str(listaLote[2]) + " " + str(listaLote[3]) + \
         " - " + str(listaLote[4])
     string2 = "Temperatura do bico: " + str(listaLote[6])
@@ -77,23 +79,40 @@ def montaLogo(listaLote):
                 break
 
             renderPDF.draw(img_file, can, teste_x, teste_y)
-            imprimeCodBarras(listaLote[8], etiquetaNumero, barras_x, barras_y)
-            montaTexto(listaLote, escrita_y, escrita_x)
-
             etiquetaNumero += 1
             etiquetaPorPagina += 1
-            teste_x = teste_x + 150
-            barras_x = barras_x + 152
-            escrita_x = escrita_x + 152
-            resto = etiquetaPorPagina % 4
 
-            if (resto == 0):
-                teste_x = 50
-                barras_x = -10
-                teste_y = teste_y - 110
-                barras_y = barras_y - 110
-                escrita_x = 8
-                escrita_y = [x - 110 for x in escrita_y]
+            if (listaLote[9] == 'Venda'):
+                imprimeCodBarras(
+                    listaLote[8], etiquetaNumero, barras_x, barras_y)
+                montaTexto(listaLote, escrita_y, escrita_x)
+                teste_x = teste_x + 150
+                barras_x = barras_x + 152
+                escrita_x = escrita_x + 152
+                resto = etiquetaPorPagina % 4
+
+                if (resto == 0):
+                    teste_x = 50
+                    barras_x = -10
+                    teste_y = teste_y - 110
+                    barras_y = barras_y - 110
+                    escrita_x = 8
+                    escrita_y = [x - 110 for x in escrita_y]
+            else:
+                montaTexto(listaLote, escrita_y, escrita_x)
+                renderPDF.draw(img_amostra, can, teste_x - 35, teste_y - 65)
+                teste_x = teste_x + 150
+                barras_x = barras_x + 152
+                escrita_x = escrita_x + 152
+                resto = etiquetaPorPagina % 4
+
+                if (resto == 0):
+                    teste_x = 50
+                    barras_x = -10
+                    teste_y = teste_y - 110
+                    barras_y = barras_y - 110
+                    escrita_x = 8
+                    escrita_y = [x - 110 for x in escrita_y]
 
         can.showPage()
     can.save()
